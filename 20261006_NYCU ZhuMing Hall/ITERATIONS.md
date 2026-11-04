@@ -31,6 +31,7 @@
 <a id="stage-2"></a>
 
 
+
 ## 階段 2：以莫內風格色塊化
 
 ![階段 2：以莫內風格色塊化](stages/02_monet_patches/screenshot.png)
@@ -44,6 +45,7 @@
 **程式碼**：[腳本 apply.py](stages/02_monet_patches/apply.py) · [材質 material.hlsl](stages/02_monet_patches/material.hlsl) · [全部參數 parameters.json](stages/02_monet_patches/parameters.json) · [和上一階段的差異](stages/02_monet_patches/README.md)
 
 <a id="stage-3"></a>
+
 
 
 ## 階段 3：細調色塊、對比、黑白點，加上康莊大道
@@ -61,6 +63,7 @@
 <a id="stage-4"></a>
 
 
+
 ## 階段 4：依生命方向流動
 
 畫面開始動起來，方向不是隨機的，而是順著生命的脈絡。
@@ -72,6 +75,7 @@
 **程式碼**：[腳本 apply.py](stages/04_life_flow/apply.py) · [材質 material.hlsl](stages/04_life_flow/material.hlsl) · [全部參數 parameters.json](stages/04_life_flow/parameters.json) · [和上一階段的差異](stages/04_life_flow/README.md)
 
 <a id="stage-5"></a>
+
 
 
 ## 階段 5：加大到遊戲中可察覺的擺動
@@ -87,6 +91,7 @@
 <a id="stage-6"></a>
 
 
+
 ## 階段 6：分開每棵樹，只動葉與灌木，模仿海邊陣風
 
 大幅度有了，但整片一起動像一塊布。這是最多次失敗的階段。
@@ -98,6 +103,7 @@
 **程式碼**：[腳本 apply.py](stages/06_natural_wind/apply.py) · [材質 material.hlsl](stages/06_natural_wind/material.hlsl) · [全部參數 parameters.json](stages/06_natural_wind/parameters.json) · [和上一階段的差異](stages/06_natural_wind/README.md)
 
 <a id="stage-7"></a>
+
 
 
 ## 階段 7：陽光把手

@@ -60,7 +60,7 @@
 
 ## 階段 4：依生命方向流動
 
-![階段 4：依生命方向流動](stages/04_life_flow/screenshot.png)
+![階段 4：依生命方向流動]
 
 畫面開始動起來，方向不是隨機的，而是順著生命的脈絡。
 
@@ -74,7 +74,7 @@
 
 ## 階段 5：加大到遊戲中可察覺的擺動
 
-![階段 5：加大到遊戲中可察覺的擺動](stages/05_visible_sway/screenshot.png)
+![階段 5：加大到遊戲中可察覺的擺動]
 
 幾個像素的晃動在遊戲裡看不出來，擺動要大到一眼就能注意到。
 
@@ -88,7 +88,7 @@
 
 ## 階段 6：分開每棵樹，只動葉與灌木，模仿海邊陣風
 
-![階段 6：分開每棵樹，只動葉與灌木，模仿海邊陣風](stages/06_natural_wind/screenshot.png)
+![階段 6：分開每棵樹，只動葉與灌木，模仿海邊陣風]
 
 大幅度有了，但整片一起動像一塊布。這是最多次失敗的階段。
 
@@ -102,7 +102,7 @@
 
 ## 階段 7：陽光把手
 
-![階段 7：陽光把手](stages/07_sun_handle/screenshot.png)
+![階段 7：陽光把手](stages/07_sun_handle/screenshot.png<img width="332" height="138" alt="截圖 2026-11-04 中午12 18 10" src="https://github.com/user-attachments/assets/0ad0459d-347e-432c-8b46-26ed1f936afa" />
 
 最後讓使用者自己調光線。
 

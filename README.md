@@ -2,7 +2,7 @@
 
 用 Unreal Engine 5.6，把陽明交大竹銘館的 3D Gaussian Splatting 掃描，一步步變成會呼吸的風格化場景。
 
-![七個階段的變化](20261006_NYCU%20ZhuMing%20Hall/demo/seven_stages.gif)
+<img src="20261006_NYCU%20ZhuMing%20Hall/demo/stages_1_2_3_7.png" width="720" alt="階段一、二、三、七的畫面">
 
 **[看七個階段的迭代過程](20261006_NYCU%20ZhuMing%20Hall/ITERATIONS.md)**
 
@@ -10,7 +10,7 @@
 
 實際畫面錄影：樹葉和灌木隨陣風擺動，樹幹、地面和圍欄不動。
 
-![自然風](20261006_NYCU%20ZhuMing%20Hall/demo/wind_recording.gif)
+<img src="20261006_NYCU%20ZhuMing%20Hall/demo/wind_recording.gif" width="720" alt="自然風">
 
 ## 怎麼打開
 

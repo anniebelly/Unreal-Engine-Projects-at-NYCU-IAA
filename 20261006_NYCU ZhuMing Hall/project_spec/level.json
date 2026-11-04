@@ -1,0 +1,420 @@
+{
+  "level": "/Game/ThirdPerson/Lvl_ZhuMingHall.Lvl_ZhuMingHall",
+  "actors": [
+    {
+      "label": "Cube",
+      "class": "StaticMeshActor",
+      "folder": "None",
+      "location": [
+        -240.0,
+        -140.0,
+        330.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": true,
+      "hidden_in_editor": false,
+      "mesh": "/Game/LevelPrototyping/Interactable/Target/Assets/SM_TargetBaseMesh.SM_TargetBaseMesh",
+      "visible": false,
+      "materials": [
+        "/Game/StarterContent/Materials/M_Basic_Floor.M_Basic_Floor"
+      ]
+    },
+    {
+      "label": "ExponentialHeightFog",
+      "class": "ExponentialHeightFog",
+      "folder": "Lighting",
+      "location": [
+        -5600.0,
+        -50.0,
+        -6850.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false
+    },
+    {
+      "label": "Floor",
+      "class": "StaticMeshActor",
+      "folder": "Playground",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        4.0,
+        4.0,
+        1.0
+      ],
+      "hidden_in_game": true,
+      "hidden_in_editor": false,
+      "mesh": "/Engine/MapTemplates/SM_Template_Map_Floor.SM_Template_Map_Floor",
+      "visible": false,
+      "materials": [
+        "/Game/StarterContent/Materials/M_Water_Lake.M_Water_Lake"
+      ]
+    },
+    {
+      "label": "MatPreviewMesh",
+      "class": "StaticMeshActor",
+      "folder": "PreviewMesh",
+      "location": [
+        639.0,
+        249.0,
+        -137.455
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -140.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": true,
+      "mesh": "/Engine/EngineMeshes/SM_MatPreviewMesh_01.SM_MatPreviewMesh_01",
+      "visible": true,
+      "materials": [
+        "/Game/_CMgit/_HLSL/HatchTexBased/hlsl_Hatching3D.hlsl_Hatching3D",
+        "/Engine/EngineMeshes/M_Mat_UnrealTech.M_Mat_UnrealTech",
+        "/Engine/EngineMeshes/M_Mat_UnrealTech.M_Mat_UnrealTech"
+      ]
+    },
+    {
+      "label": "PlayerStart",
+      "class": "PlayerStart",
+      "folder": "None",
+      "location": [
+        256.32,
+        -72.112,
+        80.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 40.0,
+        "roll": -0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false
+    },
+    {
+      "label": "PostProcessVolume",
+      "class": "PostProcessVolume",
+      "folder": "Lighting",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false,
+      "unbound": true,
+      "blendables": [
+        {
+          "object": "/Game/_CMgit/_HLSL/CM_3DGS_PP.CM_3DGS_PP",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "label": "PreviewMannequin",
+      "class": "SkeletalMeshActor",
+      "folder": "None",
+      "location": [
+        256.32,
+        -72.112,
+        -20.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": -50.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": true,
+      "hidden_in_editor": false
+    },
+    {
+      "label": "SM_SkySphere",
+      "class": "StaticMeshActor",
+      "folder": "Lighting",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        400.0,
+        400.0,
+        400.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false,
+      "mesh": "/Engine/EngineSky/SM_SkySphere.SM_SkySphere",
+      "visible": true,
+      "materials": [
+        "/Engine/EngineSky/M_SimpleSkyDome.M_SimpleSkyDome"
+      ]
+    },
+    {
+      "label": "SkyAtmosphere",
+      "class": "SkyAtmosphere",
+      "folder": "Lighting",
+      "location": [
+        0.0,
+        0.0,
+        1020.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false
+    },
+    {
+      "label": "SkyLight",
+      "class": "SkyLight",
+      "folder": "Lighting",
+      "location": [
+        0.0,
+        0.0,
+        690.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false
+    },
+    {
+      "label": "SunHandle",
+      "class": "DirectionalLight",
+      "folder": "Lighting",
+      "location": [
+        256.32,
+        -72.112,
+        690.0
+      ],
+      "rotation": {
+        "pitch": -77.791,
+        "yaw": -19.188,
+        "roll": 0.0
+      },
+      "scale": [
+        2.5,
+        2.5,
+        2.5
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false,
+      "light": {
+        "intensity": 4.2072062492370605,
+        "light_color": [
+          255,
+          246,
+          240,
+          255
+        ],
+        "mobility": "<ComponentMobility.MOVABLE: 2>",
+        "atmosphere_sun_light": true
+      }
+    },
+    {
+      "label": "VolumetricCloud",
+      "class": "VolumetricCloud",
+      "folder": "Lighting",
+      "location": [
+        0.0,
+        0.0,
+        820.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false
+    },
+    {
+      "label": "WaterBodyLake",
+      "class": "WaterBodyLake",
+      "folder": "None",
+      "location": [
+        132.625,
+        -258.416,
+        -100.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": true,
+      "water_material": "/Game/ZhuMingClean/MI_Water_Lake_Still.MI_Water_Lake_Still"
+    },
+    {
+      "label": "WaterZone",
+      "class": "WaterZone",
+      "folder": "None",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false
+    },
+    {
+      "label": "WorldDataLayers",
+      "class": "WorldDataLayers",
+      "folder": "None",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": true,
+      "hidden_in_editor": false
+    },
+    {
+      "label": "WorldPartitionMiniMap",
+      "class": "WorldPartitionMiniMap",
+      "folder": "None",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": true,
+      "hidden_in_editor": false
+    },
+    {
+      "label": "YangMing_NCTU_ZhuMingHall_Back",
+      "class": "GaussianSplatActor",
+      "folder": "None",
+      "location": [
+        -10.0,
+        -400.0,
+        -250.0
+      ],
+      "rotation": {
+        "pitch": 0.0,
+        "yaw": 0.0,
+        "roll": 0.0
+      },
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hidden_in_game": false,
+      "hidden_in_editor": false
+    }
+  ]
+}

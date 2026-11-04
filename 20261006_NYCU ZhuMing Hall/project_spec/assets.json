@@ -1,0 +1,129 @@
+{
+  "content": {
+    "(Content 根目錄)": {
+      "files": 912,
+      "bytes": 102978767,
+      "source": "RenderMan Shipshape 挑戰賽素材",
+      "status": "未使用，公開版已排除"
+    },
+    "__ExternalObjects__": {
+      "files": 8,
+      "bytes": 14844,
+      "source": "關卡物件",
+      "status": "本專案"
+    },
+    "WarmMorning": {
+      "files": 1,
+      "bytes": 25630,
+      "source": "本專案",
+      "status": "CC BY-NC 4.0"
+    },
+    "Python": {
+      "files": 3,
+      "bytes": 14462,
+      "source": "本專案",
+      "status": "CC BY-NC 4.0"
+    },
+    "ZhuMingClean": {
+      "files": 3,
+      "bytes": 307403,
+      "source": "本專案",
+      "status": "CC BY-NC 4.0"
+    },
+    "Input": {
+      "files": 9,
+      "bytes": 325917,
+      "source": "Epic 範本",
+      "status": "Epic 授權"
+    },
+    "__ExternalActors__": {
+      "files": 160,
+      "bytes": 2773123,
+      "source": "關卡物件",
+      "status": "本專案"
+    },
+    "ThirdPerson": {
+      "files": 6,
+      "bytes": 262372,
+      "source": "範本 + 本專案關卡",
+      "status": "關卡為本專案"
+    },
+    "_CMgit": {
+      "files": 14,
+      "bytes": 731564,
+      "source": "CMHsieh 課程教材",
+      "status": "公開版含，權利屬原作者"
+    },
+    "ForestGlow": {
+      "files": 13,
+      "bytes": 332742,
+      "source": "本專案",
+      "status": "CC BY-NC 4.0"
+    },
+    "NanoGS": {
+      "files": 1,
+      "bytes": 423841974,
+      "source": "竹銘館掃描（NanoGS 匯入）",
+      "status": "公開版含，需確認拍攝者與學校"
+    },
+    "Characters": {
+      "files": 128,
+      "bytes": 131383393,
+      "source": "Epic 範本",
+      "status": "Epic 授權"
+    },
+    "LevelPrototyping": {
+      "files": 36,
+      "bytes": 3188349,
+      "source": "Epic 範本",
+      "status": "Epic 授權"
+    },
+    "StarterContent": {
+      "files": 267,
+      "bytes": 644549069,
+      "source": "Epic 範本",
+      "status": "Epic 授權"
+    },
+    "113_PostProcess Material-20261103": {
+      "files": 13,
+      "bytes": 693602,
+      "source": "_CMgit 副本",
+      "status": "公開版已排除"
+    }
+  },
+  "plugins": {
+    "DynamicSky": {
+      "Version": 1,
+      "VersionName": "1.0",
+      "FriendlyName": "Dynamic Sky",
+      "Description": "Time of day, sun and moon, volumetric clouds, stars and weather (rain, snow, lightning) in one actor.",
+      "CreatedBy": "Test_1006",
+      "Modules": [
+        {
+          "Name": "DynamicSky",
+          "Type": "Runtime",
+          "LoadingPhase": "Default"
+        }
+      ]
+    },
+    "NanoGS": {
+      "Version": 1,
+      "VersionName": "1.0",
+      "FriendlyName": "NanoGS",
+      "Description": "Real-time rendering of 3D Gaussian Splatting scenes",
+      "CreatedBy": "Custom",
+      "Modules": [
+        {
+          "Name": "NanoGS",
+          "Type": "Runtime",
+          "LoadingPhase": "PostConfigInit"
+        },
+        {
+          "Name": "NanoGSEditor",
+          "Type": "Editor",
+          "LoadingPhase": "Default"
+        }
+      ]
+    }
+  }
+}

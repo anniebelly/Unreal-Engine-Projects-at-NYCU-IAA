@@ -20,6 +20,10 @@
 | [6](stages/06_natural_wind/) | 分開每棵樹，只動樹葉和灌木，模仿海邊陣風 |
 | [7](stages/07_sun_handle/) | 調整光線的 UI：陽光把手 |
 
+## 專案規格
+
+整個專案的設定都寫成了文字：[Markdown 總覽](project_spec/PROJECT.md)，以及同資料夾的 JSON（關卡物件、材質、參數、Config、資產清單）。
+
 ## 完整專案下載
 
 到 [Releases](https://github.com/anniebelly/Unreal-Engine-Projects-at-NYCU-IAA/releases/tag/v1.0-zhuming-hall) 下載壓縮檔（約 1 GB），解壓後用 UE 5.6 打開 `Test_1006.uproject`，關卡為 `Lvl_ZhuMingHall`。

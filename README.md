@@ -1,10 +1,10 @@
-# NYCU ZhuMing Hall：把 3D 掃描變成會呼吸的畫
+# NYCU ZhuMing Hall Stylize
 
-用 Unreal Engine 5.6，把陽明交大竹銘館的 3D Gaussian Splatting 掃描，一步步變成有輪廓線、色塊、自然風和可調陽光的風格化場景。
+用 Unreal Engine 5.6，把陽明交大竹銘館的 3D Gaussian Splatting 掃描，一步步變成會呼吸的風格化場景。
 
 ![七個階段的變化](20261006_NYCU%20ZhuMing%20Hall/demo/seven_stages.gif)
 
-**[⬇ 下載完整專案（約 1 GB）](https://github.com/anniebelly/Unreal-Engine-Projects-at-NYCU-IAA/releases/download/v1.0-zhuming-hall/Test_1006_public_v4_20261104.zip)** · **[看七個階段的完整過程](20261006_NYCU%20ZhuMing%20Hall/ITERATIONS.md)**
+**[看七個階段的完整過程](20261006_NYCU%20ZhuMing%20Hall/ITERATIONS.md)**
 
 ## Demo
 
@@ -15,6 +15,7 @@
 ## 怎麼打開
 
 你需要安裝 **Unreal Engine 5.6**。下載上面的壓縮檔並解壓，然後：
+**[⬇ 下載完整專案（約 1 GB）](https://github.com/anniebelly/Unreal-Engine-Projects-at-NYCU-IAA/releases/download/v1.0-zhuming-hall/Test_1006_public_v4_20261104.zip)** 
 
 ### Mac（Apple Silicon）
 
@@ -33,9 +34,7 @@ UE 要裝在預設位置 `/Users/Shared/Epic Games/UE_5.6`。這個專案的外�
 
 ### Windows
 
-打開 `Test_1006.uproject`。Windows 版尚未實際測試，遇到問題歡迎開 [Issue](https://github.com/anniebelly/Unreal-Engine-Projects-at-NYCU-IAA/issues)。
-
-第一次打開要編譯 shader，停在某個百分比很久是正常的。
+打開 `Test_1006.uproject`。Windows 版尚未實際測試，第一次打開要編譯 shader。
 
 ## 調整陽光
 

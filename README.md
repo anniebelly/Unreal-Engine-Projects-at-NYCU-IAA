@@ -10,7 +10,7 @@
 
 實際畫面錄影：樹葉和灌木隨陣風擺動，樹幹、地面和圍欄不動。
 
-![自然風](20261006_NYCU%20ZhuMing%20Hall/demo/wind.gif)
+![自然風](20261006_NYCU%20ZhuMing%20Hall/demo/wind_recording.gif)
 
 ## 怎麼打開
 

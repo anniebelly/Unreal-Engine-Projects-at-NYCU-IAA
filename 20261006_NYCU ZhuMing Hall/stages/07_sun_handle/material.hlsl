@@ -175,15 +175,18 @@ c.rgb = 0 ? (res[0] * wsum[0] + res[1] * wsum[1]) / max(wsum[0] + wsum[1], 0.001
 float sunPool = 0.0;
 float sunGain = 1.0;
 float3 sunTint = float3(1.0, 1.0, 1.0);
+float3 skyOrig = c.rgb;
 if (1)
 {
     float3 sunD = View.AtmosphereLightDirection[0].xyz;
     float3 sunI = View.AtmosphereLightIlluminanceOnGroundPostTransmittance[0].rgb;
     float sunL = dot(sunI, W);
-    float day = smoothstep(-0.05, 0.25, sunD.z);
-    sunGain = clamp(sunL / 3.365764999389649, 0.0, 1.5) * day;
+    float day = smoothstep(-0.05, 0.6, sunD.z);
+    sunGain = clamp(sunL / 2.4000000000000004, 0.0, 1.5) * day;
     sunTint = lerp(float3(1.0, 1.0, 1.0), sunI / max(sunL, 0.001), 0.5);
-    c.rgb *= lerp(0.35, 1.0, day);
+    // the whole picture follows the sun: dim and orange when low, full and neutral when high
+    c.rgb *= lerp(0.3, 1.0, day) * lerp(float3(1.0, 1.0, 1.0), float3(1.15, 0.9, 0.62), 0.8 * (1.0 - saturate(sunD.z / 0.6)));
+    skyOrig = c.rgb;
     float gw = 1.0 - smoothstep(60.0, 220.0, aboveG);
     if (gw > 0.001 && sunD.z > 0.05)
     {
@@ -233,6 +236,9 @@ if (1)
 float boost = max(road * 1.1, sunPool * 0.6) * sunGain;
 float3 lightTint = float3(1.0, 0.94, 0.8) * sunTint;
 c.rgb = c.rgb * (1.0 + boost) * lerp(float3(1.0, 1.0, 1.0), lightTint, saturate(boost)) + lightTint * 0.06 * boost;
+// the sky skips most of the grade, or contrast and highlight boosts wash it to white
+float skyM = smoothstep(2500.0, 6000.0, d) * smoothstep(-0.03, 0.03, skyOrig.b - skyOrig.g);
+c.rgb = lerp(c.rgb, skyOrig, skyM * 0.7);
 LineColor = float3(0.05, 0.05, 0.11);
 c.rgb = lerp(c.rgb, LineColor, smoothstep(0.224, 0.08, lum) * (1.0 - saturate(max(road, sunPool * sunGain))));
 edge *= 1.0;
@@ -258,7 +264,7 @@ if (1)
         }
         acc /= 48;
         float fade = 1.0 - smoothstep(0.6, 1.4, length(sunUV / ScreenMult - 0.5));
-        c.rgb += float3(1.0, 0.9, 0.68) * acc * 2.2 * fade;
+        c.rgb += float3(1.0, 0.9, 0.68) * acc * 2.2 * fade * (1.0 - skyM * 0.7);
     }
 }
 return c;

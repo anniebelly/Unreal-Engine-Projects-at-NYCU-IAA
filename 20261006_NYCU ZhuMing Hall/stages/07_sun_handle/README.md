@@ -17,6 +17,12 @@ SunHandle 即時驅動太陽方向、強度和顏色，並有滑桿面板（Cont
 | `LOW_SHRUB_SWING` | （新增） | 0.75 |
 | `SUN` | （新增） | True |
 | `SUN_NOON_PITCH` | （新增） | -78.0 |
+| `SUN_BASE_INTENSITY` | （新增） | 3.0 |
+| `SUN_RESET_INTENSITY` | （新增） | True |
+| `SKY_KEEP` | （新增） | 0.7 |
+| `DAY_RANGE` | （新增） | 0.6 |
+| `DAY_DIM` | （新增） | 0.3 |
+| `SUNSET_WARMTH` | （新增） | 0.8 |
 | `SUN_POOL` | （新增） | 0.6 |
 | `SUN_SOFTNESS` | （新增） | 0.06 |
 | `CANOPY_ABSORB` | （新增） | 2.5 |

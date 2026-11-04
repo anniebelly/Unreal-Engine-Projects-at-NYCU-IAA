@@ -87,6 +87,12 @@ ROAD_TINT = (1.0, 0.94, 0.80)
 SUN = True
 SUN_LABEL = "SunHandle"
 SUN_NOON_PITCH = -78.0   # set once, on the first run: the light points almost straight down
+SUN_BASE_INTENSITY = 3.0 # the light's Intensity that counts as normal; fixed, so the brightness slider stays meaningful
+SUN_RESET_INTENSITY = True   # put Intensity back to SUN_BASE_INTENSITY when this runs; False keeps the slider's value
+SKY_KEEP = 0.7           # how much the sky keeps its own colour instead of the grade, so it doesn't blow out
+DAY_RANGE = 0.6          # sun height (sine of elevation) where full daylight is reached; below it the scene dims
+DAY_DIM = 0.3            # scene brightness at sunrise and sunset
+SUNSET_WARMTH = 0.8      # how orange the scene turns when the sun is low
 SUN_POOL = 0.6           # how much brighter open ground gets; same soft multiply as the road light, kept below it
 SUN_SOFTNESS = 0.06      # blur of the pool edges, per cm of canopy height (bigger = softer)
 CANOPY_ABSORB = 2.5      # how much sun the canopy blocks (bigger = smaller, sharper pools)
@@ -239,6 +245,9 @@ if ({road})
 float boost = max(road * {rb_}, sunPool * {pl}) * sunGain;
 float3 lightTint = {rt} * sunTint;
 c.rgb = c.rgb * (1.0 + boost) * lerp(float3(1.0, 1.0, 1.0), lightTint, saturate(boost)) + lightTint * 0.06 * boost;
+// the sky skips most of the grade, or contrast and highlight boosts wash it to white
+float skyM = smoothstep(2500.0, 6000.0, d) * smoothstep(-0.03, 0.03, skyOrig.b - skyOrig.g);
+c.rgb = lerp(c.rgb, skyOrig, skyM * {sk});
 LineColor = {lc};
 c.rgb = lerp(c.rgb, LineColor, smoothstep({dhi}, {dlo}, lum) * (1.0 - saturate(max(road, sunPool * sunGain))));
 edge *= {ls};
@@ -342,15 +351,18 @@ SWAY_CODE = """if ({on})
 SUN_CODE = """float sunPool = 0.0;
 float sunGain = 1.0;
 float3 sunTint = float3(1.0, 1.0, 1.0);
+float3 skyOrig = c.rgb;
 if ({on})
 {{
     float3 sunD = View.AtmosphereLightDirection[0].xyz;
     float3 sunI = View.AtmosphereLightIlluminanceOnGroundPostTransmittance[0].rgb;
     float sunL = dot(sunI, W);
-    float day = smoothstep(-0.05, 0.25, sunD.z);
+    float day = smoothstep(-0.05, {dr}, sunD.z);
     sunGain = clamp(sunL / {ref}, 0.0, 1.5) * day;
     sunTint = lerp(float3(1.0, 1.0, 1.0), sunI / max(sunL, 0.001), 0.5);
-    c.rgb *= lerp(0.35, 1.0, day);
+    // the whole picture follows the sun: dim and orange when low, full and neutral when high
+    c.rgb *= lerp({dd}, 1.0, day) * lerp(float3(1.0, 1.0, 1.0), float3(1.15, 0.9, 0.62), {wm} * (1.0 - saturate(sunD.z / {dr})));
+    skyOrig = c.rgb;
     float gw = 1.0 - smoothstep(60.0, 220.0, aboveG);
     if (gw > 0.001 && sunD.z > 0.05)
     {{
@@ -391,7 +403,7 @@ RAYS_CODE = """if ({on})
         }}
         acc /= {n};
         float fade = 1.0 - smoothstep(0.6, 1.4, length(sunUV / ScreenMult - 0.5));
-        c.rgb += {rc} * acc * {it} * fade;
+        c.rgb += {rc} * acc * {it} * fade * {rk};
     }}
 }}
 """
@@ -399,7 +411,8 @@ RAYS_CODE = """if ({on})
 
 def build_code():
     rays = RAYS_CODE.format(on=int(RAYS), ln=RAY_LENGTH, n=int(RAY_SAMPLES), sky=RAY_SKY_DEPTH,
-                            dc=RAY_DECAY, rc=f3(RAY_COLOR), it=RAY_INTENSITY)
+                            dc=RAY_DECAY, rc=f3(RAY_COLOR), it=RAY_INTENSITY,
+                            rk="(1.0 - skyM * {})".format(SKY_KEEP) if MONET else "1.0")
     sway = SWAY_CODE.format(on=int(SWAY), rad=LEAF_MASK_RADIUS, amt=SWAY_AMOUNT, n=len(TREE_LIST), crown=CROWN_RADIUS,
                             wx=WIND_DIR[0], wy=WIND_DIR[1], gv=GUST_SPEED, gp=GUST_PERIOD, gs2=GUST_SHARPNESS,
                             tg=TREE_GUST_SPREAD, ts=TREE_SPEED, ox=SPLAT_OFFSET[0], oy=SPLAT_OFFSET[1], mn=SUN_MAP_MIN,
@@ -409,7 +422,7 @@ def build_code():
     ground = GROUND_CODE.format(ox=SPLAT_OFFSET[0], oy=SPLAT_OFFSET[1], oz=SPLAT_OFFSET[2],
                                 gf=", ".join(str(v) for v in GROUND_FIT))
     base = OUTLINE.replace("float2 px =", ground + sway + "float2 px =")
-    sunc = SUN_CODE.format(on=int(SUN), ref=SUN_REF, ox=SPLAT_OFFSET[0], oy=SPLAT_OFFSET[1], b0=SUN_BANDS[0],
+    sunc = SUN_CODE.format(on=int(SUN), ref=SUN_BASE_INTENSITY * 0.8, dr=DAY_RANGE, dd=DAY_DIM, wm=SUNSET_WARMTH, ox=SPLAT_OFFSET[0], oy=SPLAT_OFFSET[1], b0=SUN_BANDS[0],
                            b1=SUN_BANDS[1], b2=SUN_BANDS[2], mn=SUN_MAP_MIN, sp=SUN_MAP_SPAN, ab=CANOPY_ABSORB,
                            sf=SUN_SOFTNESS)
     if not MONET:
@@ -422,7 +435,7 @@ def build_code():
                                lt=f3(LIGHT_TINT), pastel=PASTEL, lc=f3(MONET_LINE_COLOR),
                                dlo=DARK_LO, dhi=DARK_HI, ls=LINE_STRENGTH, hb=HIGHLIGHT_BOOST, br=BRIGHTNESS,
                                road=int(ROAD), ra=f3(ROAD_A), rb=f3(ROAD_B), rw=ROAD_HALF_WIDTH, rs=ROAD_SOFT,
-                               rh=ROAD_HEIGHT, rb_=ROAD_BOOST, rt=f3(ROAD_TINT), pl=SUN_POOL)
+                               rh=ROAD_HEIGHT, rb_=ROAD_BOOST, rt=f3(ROAD_TINT), pl=SUN_POOL, sk=SKY_KEEP)
     # Edges are found on the photo; the paint dabs and grade then go on before the lines are drawn.
     return code.replace("c.rgb = lerp(c.rgb, LineColor, edge);", paint + sunc + grade + "c.rgb = lerp(c.rgb, LineColor, edge);").replace(
         "return c;", rays + "return c;")
@@ -489,7 +502,12 @@ if sun.get_actor_label() != SUN_LABEL:
     sun.set_actor_label(SUN_LABEL)
     unreal.EditorLoadingAndSavingUtils.save_dirty_packages(True, True)
     log("sun handle set to noon")
-SUN_REF = max(sun_comp.get_editor_property("intensity") * 0.8, 0.001)
+# back to normal strength: real sky brightness follows the light's Intensity
+if SUN_RESET_INTENSITY:
+    sun.modify()
+    sun_comp.modify()
+    sun_comp.set_intensity(SUN_BASE_INTENSITY)
+    unreal.EditorLoadingAndSavingUtils.save_dirty_packages(True, True)
 log("sun intensity {} rotation {}".format(sun_comp.get_editor_property("intensity"), sun.get_actor_rotation()))
 
 def data_texture(name, source):

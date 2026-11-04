@@ -260,8 +260,8 @@
         690.0
       ],
       "rotation": {
-        "pitch": -77.791,
-        "yaw": -19.188,
+        "pitch": -74.903,
+        "yaw": -62.748,
         "roll": 0.0
       },
       "scale": [
@@ -272,7 +272,7 @@
       "hidden_in_game": false,
       "hidden_in_editor": false,
       "light": {
-        "intensity": 4.2072062492370605,
+        "intensity": 3.0,
         "light_color": [
           255,
           246,

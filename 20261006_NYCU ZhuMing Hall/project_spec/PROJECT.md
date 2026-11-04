@@ -16,7 +16,7 @@
 - 引擎：Unreal Engine 5.6
 - 主要關卡：`Lvl_ZhuMingHall`（World Partition）
 - 外掛：`ModelingToolsEditorMode`、`GameplayStateTree`、`OSC`、`NanoGS`、`Water`
-- 效果全部在一個後製材質裡，由 Python 腳本寫入，專案沒有 C++ 或 Blueprint 邏輯
+- 這些效果全部在一個後製材質裡，由 Python 腳本寫入，沒有用到 C++ 或 Blueprint
 
 ## 關卡物件
 
@@ -34,7 +34,7 @@
 | `SM_SkySphere` | StaticMeshActor | [0.0, 0.0, 0.0] |  |
 | `SkyAtmosphere` | SkyAtmosphere | [0.0, 0.0, 1020.0] |  |
 | `SkyLight` | SkyLight | [0.0, 0.0, 690.0] |  |
-| `SunHandle` | DirectionalLight | [256.32, -72.112, 690.0] | Intensity 4.21，可移動，大氣太陽 |
+| `SunHandle` | DirectionalLight | [256.32, -72.112, 690.0] | Intensity 3.00，可移動，大氣太陽 |
 | `VolumetricCloud` | VolumetricCloud | [0.0, 0.0, 820.0] |  |
 | `WorldDataLayers` | WorldDataLayers | [0.0, 0.0, 0.0] | 遊戲中隱藏 |
 | `WorldPartitionMiniMap` | WorldPartitionMiniMap | [0.0, 0.0, 0.0] | 遊戲中隱藏 |
@@ -42,7 +42,7 @@
 
 ## 太陽把手
 
-關卡的 DirectionalLight 叫 `SunHandle`，目前旋轉為 pitch -77.791、yaw -19.188，Intensity 4.21。材質用 `View.AtmosphereLightDirection[0]` 和 `View.AtmosphereLightIlluminanceOnGroundPostTransmittance[0]` 即時讀取。
+關卡的 DirectionalLight 叫 `SunHandle`，目前旋轉為 pitch -74.903、yaw -62.748，Intensity 3.00。材質用 `View.AtmosphereLightDirection[0]` 和 `View.AtmosphereLightIlluminanceOnGroundPostTransmittance[0]` 即時讀取。
 
 編輯器上方選單「太陽把手」由 `Content/Python/init_unreal.py` 載入 `sun_panel.py`，提供時間、方位、亮度、暖色四條滑桿和五個時段。
 
@@ -185,7 +185,7 @@
 | `RAY_COLOR` | `[1.0, 0.9, 0.68]` |  |
 | `RAY_SKY_DEPTH` | `3000.0` | cm; only gaps farther than this (sky) let light through |
 
-其他參數見 `parameters.json`：`GROUND_HEIGHT`、`ROAD_A`、`ROAD_B`、`TREE_LIST`
+其他參數見 `parameters.json`：`GROUND_HEIGHT`、`SUN_BASE_INTENSITY`、`SUN_RESET_INTENSITY`、`SKY_KEEP`、`DAY_RANGE`、`DAY_DIM`、`SUNSET_WARMTH`、`ROAD_A`、`ROAD_B`、`TREE_LIST`
 
 ## 資產
 

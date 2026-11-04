@@ -16,6 +16,8 @@
 
 <a id="stage-1"></a>
 
+<br><br>
+
 ## 階段 1：畫出 outline
 
 ![階段 1：畫出 outline](stages/01_outline/screenshot.png)
@@ -118,6 +120,8 @@
 **關鍵參數**：SUN_POOL 0.6、SUN_SOFTNESS 0.06、CANOPY_ABSORB 2.5、LOW_SHRUB_SWING 0.75
 
 **程式碼**：[腳本 apply.py](stages/07_sun_handle/apply.py) · [材質 material.hlsl](stages/07_sun_handle/material.hlsl) · [全部參數 parameters.json](stages/07_sun_handle/parameters.json) · [和上一階段的差異](stages/07_sun_handle/README.md)
+
+<br><br>
 
 ## 最終成品
 

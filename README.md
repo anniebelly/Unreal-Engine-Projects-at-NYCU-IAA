@@ -14,8 +14,8 @@
 
 ## 怎麼打開
 
-你需要安裝 **Unreal Engine 5.6**。下載上面的壓縮檔並解壓，然後：
-**[下載完整專案（約 1 GB）](https://github.com/anniebelly/Unreal-Engine-Projects-at-NYCU-IAA/releases/download/v1.0-zhuming-hall/Test_1006_public_v4_20261104.zip)** 
+你需要安裝 **Unreal Engine 5.6**，然後
+**[下載完整專案（約 1 GB）](https://github.com/anniebelly/Unreal-Engine-Projects-at-NYCU-IAA/releases/download/v1.0-zhuming-hall/Test_1006_public_v4_20261104.zip)**。使用 Mac 需要依照以下步驟（若有破解方法請不吝告知我...）：
 
 ### Mac（Apple Silicon）
 

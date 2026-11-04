@@ -96,10 +96,10 @@
         1.0,
         1.0
       ],
-      "hidden_in_game": false,
-      "hidden_in_editor": true,
+      "hidden_in_game": true,
+      "hidden_in_editor": false,
       "mesh": "/Engine/EngineMeshes/SM_MatPreviewMesh_01.SM_MatPreviewMesh_01",
-      "visible": true,
+      "visible": false,
       "materials": [
         "/Game/_CMgit/_HLSL/HatchTexBased/hlsl_Hatching3D.hlsl_Hatching3D",
         "/Engine/EngineMeshes/M_Mat_UnrealTech.M_Mat_UnrealTech",
@@ -291,51 +291,6 @@
         0.0,
         0.0,
         820.0
-      ],
-      "rotation": {
-        "pitch": 0.0,
-        "yaw": 0.0,
-        "roll": 0.0
-      },
-      "scale": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "hidden_in_game": false,
-      "hidden_in_editor": false
-    },
-    {
-      "label": "WaterBodyLake",
-      "class": "WaterBodyLake",
-      "folder": "None",
-      "location": [
-        132.625,
-        -258.416,
-        -100.0
-      ],
-      "rotation": {
-        "pitch": 0.0,
-        "yaw": 0.0,
-        "roll": 0.0
-      },
-      "scale": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "hidden_in_game": false,
-      "hidden_in_editor": true,
-      "water_material": "/Game/ZhuMingClean/MI_Water_Lake_Still.MI_Water_Lake_Still"
-    },
-    {
-      "label": "WaterZone",
-      "class": "WaterZone",
-      "folder": "None",
-      "location": [
-        0.0,
-        0.0,
-        0.0
       ],
       "rotation": {
         "pitch": 0.0,

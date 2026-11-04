@@ -25,8 +25,8 @@
       "GameName=Test_1006"
     ],
     "/Script/EngineSettings.GameMapsSettings": [
-      "EditorStartupMap=/Game/ThirdPerson/Lvl_ThirdPerson.Lvl_ThirdPerson",
-      "GameDefaultMap=/Game/ThirdPerson/Lvl_ThirdPerson.Lvl_ThirdPerson",
+      "EditorStartupMap=/Game/ThirdPerson/Lvl_ZhuMingHall.Lvl_ZhuMingHall",
+      "GameDefaultMap=/Game/ThirdPerson/Lvl_ZhuMingHall.Lvl_ZhuMingHall",
       "TransitionMap=",
       "bUseSplitscreen=True",
       "TwoPlayerSplitscreenLayout=Horizontal",

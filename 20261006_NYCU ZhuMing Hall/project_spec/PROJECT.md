@@ -16,18 +16,18 @@
 - 引擎：Unreal Engine 5.6
 - 主要關卡：`Lvl_ZhuMingHall`（World Partition）
 - 外掛：`ModelingToolsEditorMode`、`GameplayStateTree`、`OSC`、`NanoGS`、`Water`
-- 這些效果全部在一個後製材質裡，由 Python 腳本寫入，沒有用到 C++ 或 Blueprint
+- 效果全部在一個後製材質裡，由 Python 腳本寫入，專案沒有 C++ 或 Blueprint 邏輯
 
 ## 關卡物件
 
-共 17 個（不含暫時的太陽把手面板）。
+共 15 個（不含暫時的太陽把手面板）。
 
 | 物件 | 類型 | 位置 (cm) | 備註 |
 |---|---|---|---|
 | `Cube` | StaticMeshActor | [-240.0, -140.0, 330.0] | 遊戲中隱藏 |
 | `ExponentialHeightFog` | ExponentialHeightFog | [-5600.0, -50.0, -6850.0] |  |
 | `Floor` | StaticMeshActor | [0.0, 0.0, 0.0] | 遊戲中隱藏 |
-| `MatPreviewMesh` | StaticMeshActor | [639.0, 249.0, -137.455] | 編輯器中隱藏 |
+| `MatPreviewMesh` | StaticMeshActor | [639.0, 249.0, -137.455] | 遊戲中隱藏 |
 | `PlayerStart` | PlayerStart | [256.32, -72.112, 80.0] |  |
 | `PostProcessVolume` | PostProcessVolume | [0.0, 0.0, 0.0] | 後製材質：CM_3DGS_PP |
 | `PreviewMannequin` | SkeletalMeshActor | [256.32, -72.112, -20.0] | 遊戲中隱藏 |
@@ -36,8 +36,6 @@
 | `SkyLight` | SkyLight | [0.0, 0.0, 690.0] |  |
 | `SunHandle` | DirectionalLight | [256.32, -72.112, 690.0] | Intensity 4.21，可移動，大氣太陽 |
 | `VolumetricCloud` | VolumetricCloud | [0.0, 0.0, 820.0] |  |
-| `WaterBodyLake` | WaterBodyLake | [132.625, -258.416, -100.0] | 編輯器中隱藏 |
-| `WaterZone` | WaterZone | [0.0, 0.0, 0.0] |  |
 | `WorldDataLayers` | WorldDataLayers | [0.0, 0.0, 0.0] | 遊戲中隱藏 |
 | `WorldPartitionMiniMap` | WorldPartitionMiniMap | [0.0, 0.0, 0.0] | 遊戲中隱藏 |
 | `YangMing_NCTU_ZhuMingHall_Back` | GaussianSplatActor | [-10.0, -400.0, -250.0] |  |

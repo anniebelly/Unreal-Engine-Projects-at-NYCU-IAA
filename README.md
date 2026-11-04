@@ -59,6 +59,6 @@ https://github.com/user-attachments/assets/84252d97-2165-4882-8b6c-57844a0268f5
 
 ## 致謝與授權
 
-後製材質的基礎和 `_CMgit` 素材來自 CMHsieh（Computing Aesthetics Lab）。
+後製材質的基礎和 `_CMgit` 素材來自老師 CMHsieh（Computing Aesthetics Lab）。
 
 作者自己的內容採 [CC BY-NC 4.0](LICENSE)：可以自由使用和修改，要署名，不得商用。原始素材、NanoGS 和 Unreal 範本內容屬於各自的權利人。

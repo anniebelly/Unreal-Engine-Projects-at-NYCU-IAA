@@ -8,9 +8,17 @@
 
 # Demo
 
-畫面錄影：樹葉和灌木隨陣風擺動，樹幹、地面和圍欄不動，設有不同時段的陽光可調整。
+樹葉和灌木隨陣風擺動，樹幹、地面和圍欄不動，設有不同時段的陽光可調整。
 
 https://github.com/user-attachments/assets/84252d97-2165-4882-8b6c-57844a0268f5
+
+<br>
+
+## 調整陽光
+
+點編輯器最上方選單的 **太陽把手 > 打開滑桿面板**，再到右側 **Details** 分頁，就能調整時間、方位、亮度和暖色。
+
+https://github.com/user-attachments/assets/e4879452-1e64-4155-90c1-28006c7b320e
 
 <br>
 
@@ -38,12 +46,6 @@ https://github.com/user-attachments/assets/84252d97-2165-4882-8b6c-57844a0268f5
 ### Windows
 
 打開 `Test_1006.uproject`。Windows 版尚未實際測試，第一次打開要編譯 shader。
-
-<br>
-
-## 調整陽光
-
-點編輯器最上方選單的 **太陽把手 > 打開滑桿面板**，再到右側 **Details** 分頁，就能調整時間、方位、亮度和暖色。
 
 <br>
 

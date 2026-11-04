@@ -1,0 +1,53 @@
+{
+  "THICKNESS": 1.5,
+  "DEPTH_THRESHOLD": 0.03,
+  "COLOR_THRESHOLD": 0.25,
+  "LINE_COLOR": [
+    0.02,
+    0.02,
+    0.02
+  ],
+  "MONET": true,
+  "PAINT_RADIUS": 3,
+  "PAINT_SCALE": 0.4,
+  "BRIGHTNESS": 1.1,
+  "LIGHT_TINT": [
+    1.0,
+    0.93,
+    0.76
+  ],
+  "SATURATION": 1.4,
+  "CONTRAST": 1.36,
+  "PIVOT": 0.3,
+  "BANDS": 6,
+  "PASTEL": 0.1,
+  "DARK_LO": 0.08,
+  "DARK_HI": 0.224,
+  "MONET_LINE_COLOR": [
+    0.05,
+    0.05,
+    0.11
+  ],
+  "LINE_STRENGTH": 1.0,
+  "HIGHLIGHT_BOOST": 0.4,
+  "ROAD": true,
+  "ROAD_HALF_WIDTH": 170.0,
+  "ROAD_SOFT": 140.0,
+  "ROAD_HEIGHT": 120.0,
+  "ROAD_BOOST": 1.1,
+  "ROAD_TINT": [
+    1.0,
+    0.94,
+    0.8
+  ],
+  "ROAD_A": [
+    256.32,
+    -72.11,
+    -10.0
+  ],
+  "ROAD_B": [
+    639.0,
+    249.0,
+    -137.0
+  ]
+}

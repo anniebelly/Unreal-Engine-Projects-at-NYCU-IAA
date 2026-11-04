@@ -1,0 +1,228 @@
+const float2 ScreenMult = View.ViewSizeAndInvSize.xy * View.BufferSizeAndInvSize.zw;
+ScreenUV *= ScreenMult;
+const int TexIndex = 14;
+const float Thickness = 1.5;
+const float Threshold = 0.03;
+const float ColorThreshold = 0.25;
+float3 LineColor = float3(0.02, 0.02, 0.02);
+if (1)
+{
+    float2 fuv0 = ScreenUV / ScreenMult;
+    float2 ndc = (fuv0 * 2.0 - 1.0) * float2(1.0, -1.0);
+    float3 ray = normalize(mul(float4(ndc * 1000.0, 1000.0, 1.0), View.ScreenToTranslatedWorld).xyz - View.TranslatedWorldCameraOrigin);
+    float aspect = View.ViewSizeAndInvSize.x * View.ViewSizeAndInvSize.w;
+    // clamped to the fitted area, so far pixels and the sky don't send the cubic off to infinity
+    float2 gxy = clamp((WorldPos.xy - float2(-10.0, -400.0)) / 1000.0, -2.5, 3.8);
+    const float gc[10] = { 174.82, -72.22, -49.3, 11.34, 14.51, 5.02, -1.05, -1.46, -3.94, -1.19 };
+    float groundZ = gc[0] + gc[1] * gxy.x + gc[2] * gxy.y + gc[3] * gxy.x * gxy.x + gc[4] * gxy.x * gxy.y + gc[5] * gxy.y * gxy.y
+                  + gc[6] * gxy.x * gxy.x * gxy.x + gc[7] * gxy.x * gxy.x * gxy.y + gc[8] * gxy.x * gxy.y * gxy.y + gc[9] * gxy.y * gxy.y * gxy.y;
+    float aboveG = WorldPos.z - (-250.0 + groundZ);
+    float plant = smoothstep(35.0, 35.0 * 1.6, aboveG);
+    float leafNear = 0.0;
+    if (plant > 0.001)
+    {
+        for (int st = 0; st < 16; st++)
+        {
+            float ang = st * 2.39996;
+            float rr = 0.032 * sqrt((st + 0.5) / 16.0);
+            float3 tc = SceneTextureLookup(ScreenUV + float2(cos(ang), sin(ang) * aspect) * rr * ScreenMult, TexIndex, false).rgb;
+            float tmax = max(tc.r, max(tc.g, tc.b));
+            float tsat = (tmax - min(tc.r, min(tc.g, tc.b))) / max(tmax, 0.001);
+            leafNear += smoothstep(0.22, 0.38, tsat) * smoothstep(0.82, 0.95, tc.g / max(tc.r, 0.01)) * smoothstep(1.05, 1.25, tc.g / max(tc.b, 0.01));
+        }
+        leafNear /= 16.0;
+    }
+    if (leafNear > 0.01)
+    {
+        const float4 TREES[38] = { float4(1530.0, -140.0, 0.923, 1.437), float4(930.0, 1540.0, 0.756, 5.849), float4(-70.0, 1220.0, 0.911, 0.004), float4(1410.0, 740.0, 0.855, 3.254), float4(690.0, 940.0, 1.131, 1.941), float4(2050.0, -1500.0, 0.826, 0.443), float4(1010.0, -1060.0, 1.186, 1.932), float4(1290.0, -780.0, 0.886, 6.182), float4(-190.0, 1900.0, 1.119, 4.832), float4(1530.0, -1980.0, 1.117, 0.252), float4(2170.0, -420.0, 1.142, 6.213), float4(-830.0, -300.0, 1.243, 0.575), float4(1130.0, 60.0, 1.058, 5.672), float4(-1270.0, 380.0, 1.149, 2.373), float4(1210.0, -2220.0, 0.927, 2.535), float4(-1030.0, 20.0, 1.012, 2.581), float4(1810.0, 500.0, 1.070, 4.052), float4(1930.0, -180.0, 1.109, 2.895), float4(-1030.0, 1620.0, 1.224, 3.444), float4(-150.0, -1300.0, 1.011, 6.267), float4(2250.0, -1140.0, 1.167, 3.720), float4(-670.0, 1860.0, 1.014, 6.250), float4(850.0, 460.0, 0.940, 1.038), float4(-630.0, -820.0, 0.930, 0.508), float4(-510.0, 900.0, 1.170, 6.041), float4(890.0, 1220.0, 0.793, 0.391), float4(130.0, 1940.0, 0.992, 4.729), float4(-310.0, -1020.0, 1.033, 0.899), float4(1690.0, -1660.0, 1.201, 2.461), float4(-190.0, -20.0, 0.772, 2.875), float4(130.0, -820.0, 0.972, 0.497), float4(-190.0, 2460.0, 0.939, 1.563), float4(570.0, -2380.0, 0.907, 2.560), float4(-1430.0, 700.0, 0.836, 2.439), float4(1970.0, 1100.0, 1.130, 1.397), float4(1490.0, 2380.0, 1.032, 0.401), float4(290.0, -1940.0, 0.996, 4.080), float4(2410.0, -700.0, 0.930, 0.070) };
+        float swt = View.GameTime;
+        float2 rayH = ray.xy / max(length(ray.xy), 0.001);
+        float wsum = 0.0001;
+        float wave = 0.0;
+        float envSum = 0.0;
+        float trunkD = 0.0;
+        for (int ti = 0; ti < 38; ti++)
+        {
+            float4 tr = TREES[ti];
+            float2 toT = tr.xy - CamPos.xy;
+            float dist = max(length(toT), 100.0);
+            float sigma = atan2(300.0, dist);
+            float w = exp(-6.0 * (1.0 - dot(rayH, toT / dist)) / (sigma * sigma)) * sigma;
+            // this tree's place in the gust cycle: the front's arrival plus its own scattered delay
+            float gt = swt * 0.5 - dot(tr.xy, float2(0.8, 0.6)) / 400.0 - frac(tr.w * 3.17) * 7.0 * 0.7;
+            float pulse = sin(3.14159 * gt / 7.0);
+            float env = lerp(0.12, 1.0, pow(pulse * pulse, 3.0) * (0.65 + 0.35 * sin(gt * 0.37)));
+            wave += w * env * sin(swt * 0.5 * 6.2832 / 2.6 * tr.z + tr.w);
+            envSum += w * env;
+            wsum += w;
+            trunkD = max(trunkD, 1.0 - smoothstep(90.0, 90.0 * 1.3, length(WorldPos.xy - tr.xy)));
+        }
+        wave /= wsum;
+        // shrub rows: the swing ripples along the row, at the strength of the gust nearby
+        float rowWave = (envSum / wsum) * sin(swt * 6.2832 / 2.6 - dot(WorldPos.xy, float2(0.8, 0.6)) * 0.012);
+        float shrub = 1.0 - smoothstep(250.0, 250.0 * 1.3, aboveG);
+        wave = lerp(wave, rowWave, shrub);
+        float3 camR = normalize(mul(float4(1000.0, 0.0, 1000.0, 1.0), View.ScreenToTranslatedWorld).xyz - mul(float4(-1000.0, 0.0, 1000.0, 1.0), View.ScreenToTranslatedWorld).xyz);
+        float windS = dot(float3(0.8, 0.6, 0.0), camR);
+        windS = (windS < 0.0 ? -1.0 : 1.0) * max(abs(windS), 0.5);
+        float rooted = lerp(0.2, 1.0, saturate(aboveG / 150.0));
+        // swings sideways, dipping slightly at the far ends of the swing
+        float2 bend = float2(windS * wave, -0.2 * wave * wave) * 0.03 * rooted * lerp(1.0, 0.5, shrub);
+        float2 src = clamp(ScreenUV + bend * float2(1.0, aspect) * ScreenMult, float2(0.0, 0.0), ScreenMult);
+        float3 cd = SceneTextureLookup(ScreenUV, TexIndex, false).rgb;
+        float3 cs = SceneTextureLookup(src, TexIndex, false).rgb;
+        float dmax = max(cd.r, max(cd.g, cd.b));
+        float smax = max(cs.r, max(cs.g, cs.b));
+        float leafD = smoothstep(0.22, 0.38, (dmax - min(cd.r, min(cd.g, cd.b))) / max(dmax, 0.001)) * smoothstep(0.82, 0.95, cd.g / max(cd.r, 0.01)) * smoothstep(1.05, 1.25, cd.g / max(cd.b, 0.01));
+        float leafS = smoothstep(0.22, 0.38, (smax - min(cs.r, min(cs.g, cs.b))) / max(smax, 0.001)) * smoothstep(0.82, 0.95, cs.g / max(cs.r, 0.01)) * smoothstep(1.05, 1.25, cs.g / max(cs.b, 0.01));
+        // dark leaves inside dense foliage count too, but not bark or blue gaps (red or blue at least equal to green)
+        float notBark = 1.0 - smoothstep(0.95, 1.05, max(cd.r, cd.b) / max(cd.g, 0.01));
+        notBark *= smoothstep(0.12, 0.25, (dmax - min(cd.r, min(cd.g, cd.b))) / max(dmax, 0.001));
+        // Where the pixel would read from: if that is a trunk, stay put, or the trunk's edge would swing with the leaves.
+        float2 ndcS = ((src / ScreenMult) * 2.0 - 1.0) * float2(1.0, -1.0);
+        float depthS = SceneTextureLookup(src, 1, false).r;
+        float2 srcXY = mul(float4(ndcS * depthS, depthS, 1.0), View.ScreenToTranslatedWorld).xy - View.TranslatedWorldCameraOrigin.xy + CamPos.xy;
+        float trunkS = 0.0;
+        for (int tj = 0; tj < 38; tj++)
+        {
+            trunkS = max(trunkS, 1.0 - smoothstep(90.0, 90.0 * 1.3, length(srcXY - TREES[tj].xy)));
+        }
+        float moveIt = max(max(leafD, leafS), smoothstep(0.45, 0.7, leafNear) * notBark) * plant * (1.0 - max(trunkD, trunkS));
+        ScreenUV = lerp(ScreenUV, src, moveIt);
+    }
+}
+float2 px = View.BufferSizeAndInvSize.zw * Thickness;
+float4 c = SceneTextureLookup(ScreenUV, TexIndex, false);
+// depth edges
+float d = SceneTextureLookup(ScreenUV, 1, false).r;
+float dL = SceneTextureLookup(ScreenUV - float2(px.x, 0.0), 1, false).r;
+float dR = SceneTextureLookup(ScreenUV + float2(px.x, 0.0), 1, false).r;
+float dU = SceneTextureLookup(ScreenUV - float2(0.0, px.y), 1, false).r;
+float dD = SceneTextureLookup(ScreenUV + float2(0.0, px.y), 1, false).r;
+float diff = (abs(dL - d) + abs(dR - d) + abs(dU - d) + abs(dD - d)) / max(d, 1.0);
+float edge = smoothstep(Threshold, 2.0 * Threshold, diff);
+// brightness edges, for the splat scan where depth has no lines
+const float3 W = float3(0.3, 0.59, 0.11);
+float l = dot(c.rgb, W);
+float lL = dot(SceneTextureLookup(ScreenUV - float2(px.x, 0.0), TexIndex, false).rgb, W);
+float lR = dot(SceneTextureLookup(ScreenUV + float2(px.x, 0.0), TexIndex, false).rgb, W);
+float lU = dot(SceneTextureLookup(ScreenUV - float2(0.0, px.y), TexIndex, false).rgb, W);
+float lD = dot(SceneTextureLookup(ScreenUV + float2(0.0, px.y), TexIndex, false).rgb, W);
+float ldiff = abs(lL - l) + abs(lR - l) + abs(lU - l) + abs(lD - l);
+edge = max(edge, smoothstep(ColorThreshold, 2.0 * ColorThreshold, ldiff));
+const int R = 2;
+// Life-vein flow: soil = near the ground plane (PlayerStart -> preview mesh) and not green; everything above
+// (trunks, leaves) streams upward. Grey/white/black (non-living: buildings, iron gates) stays still. The upward stream uses two crossfaded phases so it loops without a jump.
+float soil = 0.0;
+float green = 0.0;
+float tt = View.GameTime;
+float2 circ = float2(0.0, 0.0);
+float upPhase = 0.0;
+float alive = 0.0;
+if (0)
+{
+    const float3 GA = float3(256.31994059888535, -72.11163603319427, -10.0);
+    const float3 GB = float3(638.9953536580487, 248.9961012561818, -137.45454545454544);
+    float2 gab = GB.xy - GA.xy;
+    float gt = dot(WorldPos.xy - GA.xy, gab) / max(dot(gab, gab), 1.0);
+    float above = WorldPos.z - lerp(GA.z, GB.z, gt);
+    green = saturate((c.g - max(c.r, c.b)) * 4.0);
+    float cmax = max(c.r, max(c.g, c.b));
+    float sat = (cmax - min(c.r, min(c.g, c.b))) / max(cmax, 0.001);
+    float brown = smoothstep(0.02, 0.1, c.r - c.b);
+    alive = smoothstep(0.12, 0.25, sat) * max(green, brown);
+    soil = (1.0 - smoothstep(50.0, 50.0 * 1.6, above)) * (1.0 - green);
+    float ph = dot(WorldPos.xy, float2(0.013, 0.017));
+    circ = float2(cos(tt * 1.2 + ph), sin(tt * 1.2 + ph)) * 3.0;
+    upPhase = tt * 0.35 * lerp(1.0, 4.68, green) + sin(dot(WorldPos.xy, float2(0.004, 0.003))) * 0.25;
+}
+float3 res[2] = { c.rgb, c.rgb };
+float wsum[2] = { 0.5, 0.5 };
+const float2 ox[4] = { float2(-1,-1), float2(1,-1), float2(-1,1), float2(1,1) };
+float n = (R + 1) * (R + 1);
+for (int layer = 0; layer < (0 ? 2 : 1); layer++)
+{
+    float p = frac(upPhase + layer * 0.5);
+    wsum[layer] = 0 ? 1.0 - abs(2.0 * p - 1.0) : 1.0;
+    float2 off = lerp(float2(0.0, p * 7.2 * lerp(1.0, 0.0, green)), circ, soil) * alive * View.BufferSizeAndInvSize.zw;
+    float3 m[4] = { float3(0,0,0), float3(0,0,0), float3(0,0,0), float3(0,0,0) };
+    float3 s[4] = { float3(0,0,0), float3(0,0,0), float3(0,0,0), float3(0,0,0) };
+    for (int k = 0; k < 4; k++)
+    {
+        for (int i = 0; i <= R; i++)
+        {
+            for (int j = 0; j <= R; j++)
+            {
+                float3 t = SceneTextureLookup(ScreenUV + off + float2(i, j) * 0.3 * ox[k] * View.BufferSizeAndInvSize.zw, TexIndex, false).rgb;
+                m[k] += t;
+                s[k] += t * t;
+            }
+        }
+    }
+    float best = 1e9;
+    for (int q = 0; q < 4; q++)
+    {
+        float3 mu = m[q] / n;
+        float3 v = abs(s[q] / n - mu * mu);
+        float vs = v.r + v.g + v.b;
+        if (vs < best) { best = vs; res[layer] = mu; }
+    }
+}
+c.rgb = 0 ? (res[0] * wsum[0] + res[1] * wsum[1]) / max(wsum[0] + wsum[1], 0.001) : res[0];
+c.rgb = saturate((c.rgb - 0.3) * 1.36 + 0.3);
+float lum = dot(c.rgb, W);
+if (12 > 0)
+{
+    float b = lum * 12;
+    float q = (floor(b) + smoothstep(0.3, 0.7, frac(b))) / 12;
+    c.rgb *= q / max(lum, 0.001);
+    lum = q;
+}
+c.rgb = lerp(float3(lum, lum, lum), c.rgb, 1.4);
+c.rgb = lerp(c.rgb, c.rgb * float3(1.0, 0.93, 0.76) * 1.08, saturate(lum * 1.5));
+c.rgb = lerp(c.rgb, float3(1, 1, 1), 0.1 * saturate(lum * 1.5));
+c.rgb *= 1.0 + 0.4 * smoothstep(0.4, 0.85, lum);
+c.rgb *= 1.1;
+c.rgb = max(c.rgb, 0.0);
+float road = 0.0;
+if (1)
+{
+    const float3 A = float3(256.31994059888535, -72.11163603319427, -10.0);
+    const float3 B = float3(638.9953536580487, 248.9961012561818, -137.45454545454544);
+    float2 ab = B.xy - A.xy;
+    float t = saturate(dot(WorldPos.xy - A.xy, ab) / max(dot(ab, ab), 1.0));
+    float dist = length(WorldPos.xy - (A.xy + ab * t));
+    float above = WorldPos.z - lerp(A.z, B.z, t);
+    road = (1.0 - smoothstep(170.0, 170.0 + 140.0, dist)) * (1.0 - smoothstep(120.0 * 0.5, 120.0, above));
+    road *= 1.0 - 0.35 * saturate(dist / 170.0);  // hotter down the middle, like a spotlight
+    c.rgb = lerp(c.rgb, c.rgb * (1.0 + 1.1) * float3(1.0, 0.94, 0.8) + float3(1.0, 0.94, 0.8) * 0.06 * 1.1, road);
+}
+LineColor = float3(0.05, 0.05, 0.11);
+c.rgb = lerp(c.rgb, LineColor, smoothstep(0.224, 0.08, lum) * (1.0 - road));
+edge *= 1.0;
+c.rgb = lerp(c.rgb, LineColor, edge);
+if (1)
+{
+    const float3 SunDir = float3(-0.19973703101655327, 0.06950939668032119, 0.977380970867466);
+    float4 sc = mul(float4(View.TranslatedWorldCameraOrigin + SunDir * 1000000.0, 1.0), View.TranslatedWorldToClip);
+    if (sc.w > 0.0)
+    {
+        float2 sunUV = ((sc.xy / sc.w) * float2(0.5, -0.5) + 0.5) * ScreenMult;
+        float2 delta = (sunUV - ScreenUV) * 0.9 / 48;
+        float2 ruv = ScreenUV;
+        float illum = 1.0;
+        float acc = 0.0;
+        for (int r = 0; r < 48; r++)
+        {
+            ruv += delta;
+            float rl = dot(SceneTextureLookup(ruv, TexIndex, false).rgb, W);
+            float rd = SceneTextureLookup(ruv, 1, false).r;
+            acc += smoothstep(0.45, 0.85, rl) * smoothstep(3000.0, 3000.0 * 2.5, rd) * illum;
+            illum *= 0.965;
+        }
+        acc /= 48;
+        float fade = 1.0 - smoothstep(0.6, 1.4, length(sunUV / ScreenMult - 0.5));
+        c.rgb += float3(1.0, 0.9, 0.68) * acc * 2.2 * fade;
+    }
+}
+return c;

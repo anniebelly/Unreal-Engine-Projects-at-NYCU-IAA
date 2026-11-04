@@ -4,6 +4,8 @@
 
 <img src="20261006_NYCU%20ZhuMing%20Hall/demo/stages_1_2_3_7.png" width="100%" alt="階段一、二、三、七的畫面">
 
+<br><br>
+
 ## Demo
 
 畫面錄影：樹葉和灌木隨陣風擺動，樹幹、地面和圍欄不動，設有不同時段的陽光可調整。

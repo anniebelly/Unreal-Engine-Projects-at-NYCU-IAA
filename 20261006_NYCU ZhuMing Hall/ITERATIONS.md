@@ -102,7 +102,8 @@
 
 ## 階段 7：陽光把手
 
-![階段 7：陽光把手](stages/07_sun_handle/screenshot.png<img width="332" height="138" alt="截圖 2026-11-04 中午12 18 10" src="https://github.com/user-attachments/assets/0ad0459d-347e-432c-8b46-26ed1f936afa" />
+![階段 7：陽光把手](stages/07_sun_handle/screenshot.png)
+<img width="332" height="138" alt="截圖 2026-11-04 中午12 18 10" src="https://github.com/user-attachments/assets/0ad0459d-347e-432c-8b46-26ed1f936afa" />
 
 最後讓使用者自己調光線。
 

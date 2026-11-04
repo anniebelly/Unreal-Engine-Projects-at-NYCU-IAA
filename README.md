@@ -26,6 +26,11 @@ UE 要裝在預設位置。這個專案的外掛沒有 Apple 認證，第一次�
 4. 再打開一次專案，有詢問就選 **打開**。
 5. 第二個檔案會再被擋一次，重複步驟 2 到 4。
 
+**打不開時**
+
+- **沒有警告、UE 一直停著或跳一下就沒反應**：強制結束 UnrealEditor（`Cmd + Option + Esc`），把解壓後的資料夾改個名字，再打開一次。
+- **系統設定裡找不到「強制打開」**：開啟「終端機」，輸入 `xattr -dr com.apple.quarantine ` 後把解壓後的資料夾拖進視窗，按 Enter，再打開專案。這會解除這個資料夾的下載隔離，請只用在你信任的檔案上。
+
 ### Windows
 
 打開 `Test_1006.uproject`。Windows 版尚未實際測試，遇到問題歡迎開 [Issue](https://github.com/anniebelly/Unreal-Engine-Projects-at-NYCU-IAA/issues)。

@@ -17,6 +17,8 @@
 - 主要關卡：`Lvl_ZhuMingHall`（World Partition）
 - 外掛：`ModelingToolsEditorMode`、`GameplayStateTree`、`OSC`、`NanoGS`、`Water`
 - 這些效果全部在一個後製材質裡，由 Python 腳本寫入，沒有用到 C++ 或 Blueprint
+- 曝光固定為手動（補償 -1），寫在 PostProcessVolume 裡，所以每台電腦和 Play 的亮度相同
+- 掃描沒有碰撞，玩家走在隱藏的 Floor 上，Floor 貼合掃描地面的最佳平面
 
 ## 關卡物件
 
@@ -26,9 +28,9 @@
 |---|---|---|---|
 | `Cube` | StaticMeshActor | [-240.0, -140.0, 330.0] | 遊戲中隱藏 |
 | `ExponentialHeightFog` | ExponentialHeightFog | [-5600.0, -50.0, -6850.0] |  |
-| `Floor` | StaticMeshActor | [0.0, 0.0, 0.0] | 遊戲中隱藏 |
+| `Floor` | StaticMeshActor | [103.0, -200.0, -85.459] | 遊戲中隱藏 |
 | `MatPreviewMesh` | StaticMeshActor | [639.0, 249.0, -137.455] | 遊戲中隱藏 |
-| `PlayerStart` | PlayerStart | [256.32, -72.112, 80.0] |  |
+| `PlayerStart` | PlayerStart | [103.0, -200.0, 14.541] |  |
 | `PostProcessVolume` | PostProcessVolume | [0.0, 0.0, 0.0] | 後製材質：CM_3DGS_PP |
 | `PreviewMannequin` | SkeletalMeshActor | [256.32, -72.112, -20.0] | 遊戲中隱藏 |
 | `SM_SkySphere` | StaticMeshActor | [0.0, 0.0, 0.0] |  |

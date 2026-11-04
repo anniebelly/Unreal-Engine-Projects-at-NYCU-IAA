@@ -26,7 +26,8 @@
       "visible": false,
       "materials": [
         "/Game/StarterContent/Materials/M_Basic_Floor.M_Basic_Floor"
-      ]
+      ],
+      "collision": false
     },
     {
       "label": "ExponentialHeightFog",
@@ -55,14 +56,14 @@
       "class": "StaticMeshActor",
       "folder": "Playground",
       "location": [
-        0.0,
-        0.0,
-        0.0
+        103.0,
+        -200.0,
+        -85.459
       ],
       "rotation": {
-        "pitch": 0.0,
-        "yaw": 0.0,
-        "roll": 0.0
+        "pitch": -3.966,
+        "yaw": -0.0,
+        "roll": 2.72
       },
       "scale": [
         4.0,
@@ -75,7 +76,8 @@
       "visible": false,
       "materials": [
         "/Game/StarterContent/Materials/M_Water_Lake.M_Water_Lake"
-      ]
+      ],
+      "note": "hidden walking surface fitted to the scan ground"
     },
     {
       "label": "MatPreviewMesh",
@@ -104,16 +106,17 @@
         "/Game/_CMgit/_HLSL/HatchTexBased/hlsl_Hatching3D.hlsl_Hatching3D",
         "/Engine/EngineMeshes/M_Mat_UnrealTech.M_Mat_UnrealTech",
         "/Engine/EngineMeshes/M_Mat_UnrealTech.M_Mat_UnrealTech"
-      ]
+      ],
+      "collision": false
     },
     {
       "label": "PlayerStart",
       "class": "PlayerStart",
       "folder": "None",
       "location": [
-        256.32,
-        -72.112,
-        80.0
+        103.0,
+        -200.0,
+        14.541
       ],
       "rotation": {
         "pitch": 0.0,
@@ -155,7 +158,12 @@
           "object": "/Game/_CMgit/_HLSL/CM_3DGS_PP.CM_3DGS_PP",
           "weight": 1.0
         }
-      ]
+      ],
+      "exposure": {
+        "method": "Manual",
+        "apply_physical_camera": false,
+        "bias": -1.0
+      }
     },
     {
       "label": "PreviewMannequin",

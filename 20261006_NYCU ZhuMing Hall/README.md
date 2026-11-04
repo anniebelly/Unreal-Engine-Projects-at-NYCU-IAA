@@ -36,16 +36,22 @@
 - `content_python/`：陽光把手面板，放到專案的 `Content/Python/`
 - `data/`：烘焙好的兩張圖和樹幹位置
 
-## 使用方式
+## 裝到自己的專案
 
-需要 UE 5.6、Python Editor Script Plugin、NanoGS 外掛、一個 Gaussian Splat 場景，以及含 `CustomBrick` Custom 節點的後製材質 `/Game/_CMgit/_HLSL/CM_3DGS_PP`（節點要有 `ScreenUV` 輸入）。
+只是想打開看成果的話，請用[專案首頁](../README.md)的下載連結。如果你已有這份竹銘館掃描，想把效果裝到自己的專案，需要：
+
+- UE 5.6、NanoGS 和 Python Editor Script Plugin
+- 掃描放在關卡裡，旋轉 0、縮放 1（位置不限）
+- 課程材質 `/Game/_CMgit/_HLSL/CM_3DGS_PP`，`CustomBrick` 節點接到 Emissive Color，並掛在 PostProcessVolume 上
+- 關卡裡有 DirectionalLight 和 SkyAtmosphere
+
+步驟：
 
 1. 把 `data/` 裡的檔案複製到專案的 `Saved/CMgit/`。
 2. 把 `content_python/` 裡的檔案複製到專案的 `Content/Python/`，重開編輯器。
-3. 打開關卡，在 Output Log 的 Python 模式執行 `exec(open("腳本路徑").read())`。
-4. 從上方選單「太陽把手」打開滑桿面板，在 Details 裡調整。
+3. 打開關卡，在 Output Log 的 Python 模式執行 `exec(open("腳本路徑").read())`，腳本是 `scripts/outline_3dgs_pp.py`。
 
-地形曲面 `GROUND_FIT`、遮光圖和樹幹位置都是這份掃描專屬的。換成別的掃描時，要改 `bake_*.py` 的路徑重新產生，並重新擬合地形。
+康莊大道的光是從 PlayerStart 連到 `MatPreviewMesh`，沒有這個物件時會用預設座標，位置可能會偏。`GROUND_FIT`、遮光圖和樹幹位置都是這份掃描專屬的，換掃描要用 `bake_*.py` 重新產生。這個流程尚未在其他專案實測。
 
 ## 已知限制
 

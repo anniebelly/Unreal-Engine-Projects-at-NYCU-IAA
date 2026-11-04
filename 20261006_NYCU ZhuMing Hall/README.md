@@ -18,6 +18,10 @@
 | [6](stages/06_natural_wind/) | 分開每棵樹，只動樹葉和灌木，模仿海邊陣風 |
 | [7](stages/07_sun_handle/) | 調整光線的 UI：陽光把手 |
 
+## 完整專案下載
+
+到 [Releases](https://github.com/anniebelly/Unreal-Engine-Projects-at-NYCU-IAA/releases/tag/v1.0-zhuming-hall) 下載壓縮檔（約 1 GB），解壓後用 UE 5.6 打開 `Test_1006.uproject`，關卡為 `Lvl_ZhuMingHall`。
+
 ## 內容
 
 - `scripts/outline_3dgs_pp.py`：最終版，所有參數都在檔案開頭
@@ -45,6 +49,6 @@
 
 ## 致謝與授權
 
-後製材質的基礎和 `_CMgit` 素材來自 CMHsieh（Computing Aesthetics Lab）。NanoGS 外掛和掃描資料不包含在這個 repo 裡。
+後製材質的基礎和 `_CMgit` 素材來自 CMHsieh（Computing Aesthetics Lab）。NanoGS 外掛、掃描資料和這些素材只在 Release 的壓縮檔裡，不在 repo 的檔案中。
 
-本作品採用 [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hant) 授權（全文見 `LICENSE`）：可以自由使用、修改和分享，但要署名，且不得用於商業目的。此授權只涵蓋本 repo 中屬於作者的內容；CMHsieh 的原始素材不在授權範圍內。
+本作品採用 [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hant) 授權（全文見 `LICENSE`）：可以自由使用、修改和分享，但要署名，且不得用於商業目的。此授權只涵蓋本 repo 中屬於作者的內容；CMHsieh 的原始素材、NanoGS 和 Unreal 範本內容不在授權範圍內。

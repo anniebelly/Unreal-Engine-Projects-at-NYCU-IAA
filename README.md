@@ -8,11 +8,10 @@
 
 ## Demo
 
-實際畫面錄影：樹葉和灌木隨陣風擺動，樹幹、地面和圍欄不動。
+畫面錄影：樹葉和灌木隨陣風擺動，樹幹、地面和圍欄不動，設有不同時段的陽光可調整。
 
 https://github.com/user-attachments/assets/84252d97-2165-4882-8b6c-57844a0268f5
 
-<img src="20261006_NYCU%20ZhuMing%20Hall/demo/wind_short.gif" width="720" alt="自然風">
 
 ## 怎麼打開
 

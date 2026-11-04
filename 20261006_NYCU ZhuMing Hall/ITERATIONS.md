@@ -119,3 +119,20 @@
 - [陽光把手面板](content_python/sun_panel.py)
 - [遮光圖烘焙](scripts/bake_canopy.py) · [灌木分布圖烘焙](scripts/bake_low_shrubs.py)
 - [完整專案下載](https://github.com/anniebelly/Unreal-Engine-Projects-at-NYCU-IAA/releases/tag/v1.0-zhuming-hall)
+使用 Mac 需要依照以下步驟（若有破解方法請不吝告知我...）：
+
+### Mac（Apple Silicon）
+
+UE 要裝在預設位置 `/Users/Shared/Epic Games/UE_5.6`。這個專案的外掛沒有 Apple 認證，所以第一次要放行兩次，**第三次打開 `Test_1006.uproject` 就會順利開啟**：
+
+1. **第一次打開** `Test_1006.uproject`：出現「Apple 無法驗證」的警告時按 **完成**（不要按丟到垃圾桶），錯誤訊息按 **OK**。
+2. 到 **系統設定 > 隱私權與安全性**，捲到最下面，按 **強制允許**（有些 macOS 顯示為「強制打開」）。
+3. **第二次打開** `Test_1006.uproject`：有詢問就選 **打開**。第二個外掛檔案會再被擋一次，一樣按 **完成** 和 **OK**。
+4. 再到 **系統設定 > 隱私權與安全性**，捲到最下面，按 **強制允許**。
+5. **第三次打開** `Test_1006.uproject`，有詢問就選 **打開**，專案就會順利開啟。
+
+**打不開時**
+
+- **沒有警告、UE 一直停著或跳一下就沒反應**：強制結束 UnrealEditor（`Cmd + Option + Esc`），把解壓後的資料夾改個名字，再打開一次。
+- **系統設定裡找不到「強制允許」**：開啟「終端機」，輸入 `xattr -dr com.apple.quarantine ` 後把解壓後的資料夾拖進視窗，按 Enter，再打開專案。這會解除這個資料夾的下載隔離，請只用在你信任的檔案上。
+

@@ -1,10 +1,8 @@
 # NYCU ZhuMing Hall Stylize
 
-用 Unreal Engine 5.6，把陽明交大竹銘館的 3D Gaussian Splatting 掃描，一步步變成會呼吸的風格化場景。
+用 Unreal Engine 5.6，把陽明交大竹銘館的 3D Gaussian Splatting 掃描，經過 **[七個階段的迭代過程](20261006_NYCU%20ZhuMing%20Hall/ITERATIONS.md)** 一步步變成會呼吸的風格化場景。
 
-<img src="20261006_NYCU%20ZhuMing%20Hall/demo/stages_1_2_3_7.png" width="720" alt="階段一、二、三、七的畫面">
-
-**[看七個階段的迭代過程](20261006_NYCU%20ZhuMing%20Hall/ITERATIONS.md)**
+<img src="20261006_NYCU%20ZhuMing%20Hall/demo/stages_1_2_3_7.png" width="100%" alt="階段一、二、三、七的畫面">
 
 ## Demo
 

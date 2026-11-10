@@ -51,6 +51,8 @@
 2. 把 `content_python/` 裡的檔案複製到專案的 `Content/Python/`，重開編輯器。
 3. 打開關卡，在 Output Log 的 Python 模式執行 `exec(open("腳本路徑").read())`，腳本是 `scripts/outline_3dgs_pp.py`。
 
+各階段的 `parameters.json` 是那個階段腳本開頭的設定值紀錄，不是 Post Process 的欄位，無法直接貼進 PostProcessVolume 或材質。要調整效果，請改 `apply.py`（或 `scripts/outline_3dgs_pp.py`）開頭同名的數值，再執行一次腳本，腳本會把它們寫進材質。
+
 若要和原作相同的亮度和 Play 位置，再執行 `scripts/fix_exposure.py`（把曝光固定在 PostProcessVolume）和 `scripts/fix_play_start.py`（把玩家站的地面貼合掃描）。
 
 康莊大道的光是從 PlayerStart 連到 `MatPreviewMesh`，沒有這個物件時會用預設座標，位置可能會偏。`GROUND_FIT`、遮光圖和樹幹位置都是這份掃描專屬的，換掃描要用 `bake_*.py` 重新產生。這個流程尚未在其他專案實測。
